@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomic Heart", "Atomic Hear
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Haking", "Haking\Haking.csproj", "{5BA1B9C5-F161-4EC2-A964-97CF92B1AB8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workers from best company HyperGym", "Workers from best company HyperGym\Workers from best company HyperGym.csproj", "{4937C49C-2198-4544-8F4B-F724197B417E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5BA1B9C5-F161-4EC2-A964-97CF92B1AB8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BA1B9C5-F161-4EC2-A964-97CF92B1AB8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BA1B9C5-F161-4EC2-A964-97CF92B1AB8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4937C49C-2198-4544-8F4B-F724197B417E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4937C49C-2198-4544-8F4B-F724197B417E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4937C49C-2198-4544-8F4B-F724197B417E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4937C49C-2198-4544-8F4B-F724197B417E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,16 +6,13 @@ namespace Haking
     {
         static void Main(string[] args)
         {
+            string id = "63bf2f0e-0cfc-4c93-9f89-70e8668abaed";
             XDocument xml = XDocument.Load("E:\\DenstepJanger.xml");
 
+            var person = xml.Element("people").Elements("person").FirstOrDefault(p => p.Attribute("ID").Value == id);
+            person.Remove();
 
-            if ((xml.Element("people")?.Elements("person").Where(p => int.Parse(p.Element("lvl").Value) > 3).Count() > 0))
-            {
-                var persons = xml.Element("people").Elements("person").Where(p => int.Parse(p.Element("lvl").Value) > 3);
-                Console.WriteLine(persons.First().Element("name"));
-            }
-    
-           
+            xml.Save("E:\\DenstepJanger.xml");
         }
     }
 }
