@@ -27,7 +27,7 @@ namespace Haking
             {
                 Console.SetCursorPosition(0, 0);
                 Console.WriteLine("                  **=- Redactor Information -=**");
-                Console.WriteLine("[W сохранить] [E скачять] [Esc выйти]");
+                Console.WriteLine("[W сохранить] [E скачять] [R, выбрать компанию] [Esc выйти]");
                 Console.WriteLine("[A создать компанию] [S, удалить компанию]");
 
                 if (Console.KeyAvailable)
@@ -40,6 +40,7 @@ namespace Haking
                         case ConsoleKey.E: LoadXML(); break;
                         case ConsoleKey.A: CreateCompany(); break;
                         case ConsoleKey.S: DeleteCompany(); break;
+                        case ConsoleKey.R: ChooseCompany(); break;
                         case ConsoleKey.Escape: temp = false; break;
                     }
                 }
@@ -83,7 +84,7 @@ namespace Haking
 
                 foreach (var user in users)
                 {
-                    root.Element("users").Add(new XElement("person", new XElement("name", user.Name), new XElement("ID", user.Id)));
+                    root.Element("users").Add(new XElement("person", new XElement("name", user.Name), new XElement("age", user.Age), new XElement("ID", user.Id)));
                 }
 
                 foreach (var company in companies)
@@ -91,9 +92,9 @@ namespace Haking
                     XElement workers = new XElement("workers");
                     foreach (var user in company.workers)
                     {
-                        workers.Add(new XElement("person", new XElement("name", user.Name), new XElement("ID", user.Id)));
+                        workers.Add(new XElement("person", new XElement("name", user.Name), new XElement("age", user.Age), new XElement("ID", user.Id)));
                     }
-                    root.Element("companies").Add(new XElement("company", new XElement("name", company.Name), new XElement("maxcountworkers", company.maxcountworkers), new XElement("entryage", company.entryage), new XElement("countworkers", company.workers.Count)), workers);
+                    root.Element("companies").Add(new XElement("company", new XElement("name", company.Name), new XElement("maxcountworkers", company.maxcountworkers), new XElement("entryage", company.entryage), new XElement("countworkers", company.workers.Count), workers));
                 }
                 
 
@@ -111,7 +112,7 @@ namespace Haking
 
                 foreach (var user in users)
                 {
-                    root.Element("users").Add(new XElement("person", new XElement("name", user.Name), new XElement("ID", user.Id)));
+                    root.Element("users").Add(new XElement("person", new XElement("name", user.Name), new XElement("age", user.Age), new XElement("ID", user.Id)));
                 }
 
                 foreach (var company in companies)
@@ -119,9 +120,9 @@ namespace Haking
                     XElement workers = new XElement("workers");
                     foreach (var user in company.workers)
                     {
-                        workers.Add(new XElement("person", new XElement("name", user.Name), new XElement("ID", user.Id)));
+                        workers.Add(new XElement("person", new XElement("name", user.Name), new XElement("age", user.Age), new XElement("ID", user.Id)));
                     }
-                    root.Element("companies").Add(new XElement("company", new XElement("name", company.Name), new XElement("maxcountworkers", company.maxcountworkers), new XElement("entryage", company.entryage), new XElement("countworkers", company.workers.Count)), workers);
+                    root.Element("companies").Add(new XElement("company", new XElement("name", company.Name), new XElement("maxcountworkers", company.maxcountworkers), new XElement("entryage", company.entryage), new XElement("countworkers", company.workers.Count), workers));
                 }
 
                 doc.Save($"{name}\\info.xml");
@@ -195,8 +196,18 @@ namespace Haking
 
                     switch (key)
                     {
-                        case ConsoleKey.S: queue.Enqueue(queue.Dequeue()); break;
-                        case ConsoleKey.D: file = queue.Peek(); temp = false; break;
+                        case ConsoleKey.S:
+                            if (queue.Count > 1)
+                            {
+                                queue.Enqueue(queue.Dequeue());
+                            }
+                            break;
+                        case ConsoleKey.D: if (queue.Count >= 1)
+                            {
+                                file = queue.Peek();
+                            }
+                            
+                            temp = false; break;
                         case ConsoleKey.Escape: temp = false; break;
                     }
                 }
@@ -209,16 +220,16 @@ namespace Haking
                 foreach (var person in doc.Root.Element("users").Elements("person"))
                 {
                     
-                    users.Add(new Person(person.Element("name").Value, Guid.Parse(person.Element("ID").Value)));
+                    users.Add(new Person(person.Element("name").Value, Guid.Parse(person.Element("ID").Value), int.Parse(person.Element("age").Value)));
                 }
                 companies = new List<Company>();
                 foreach (var company in doc.Root.Element("companies").Elements("company"))
                 {
                     
                     Company comp = new Company(company.Element("name").Value, int.Parse(company.Element("entryage").Value), int.Parse(company.Element("maxcountworkers").Value));
-                    foreach (var person in company.Elements("workers"))
+                    foreach (var person in company.Element("workers").Elements("person"))
                     {
-                        comp.AddPerson(new Person(person.Element("name").Value, Guid.Parse(person.Element("ID").Value)));
+                        comp.AddPerson(new Person(person.Element("name").Value, Guid.Parse(person.Element("ID").Value), int.Parse(person.Element("age").Value)), in users);
                     }
                     
                     companies.Add(comp);
@@ -230,6 +241,62 @@ namespace Haking
 
             
             Console.Clear();
+        }
+
+        public void ChooseCompany()
+        {
+            Console.Clear();
+
+            Queue<Company> queue = new Queue<Company>(companies.ToArray());
+            FileInfo file = null;
+            bool temp = true;
+
+            while (temp)
+            {
+                Console.SetCursorPosition(0, 0);
+                Console.WriteLine("[S скип] [D открыть] [ESC выйти]");
+                Console.WriteLine("Компании:");
+
+                int temp2 = 0;
+                foreach (var xml in queue)
+                {
+                    if (temp2 == 0)
+                    {
+                        Console.WriteLine($" >{xml.Name}                                   ");
+                        temp2 = 1;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"  {xml.Name}                                   ");
+                    }
+
+
+                }
+
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKey key = Console.ReadKey().Key;
+
+                    switch (key)
+                    {
+                        case ConsoleKey.S: if (queue.Count > 1)
+                                queue.Enqueue(queue.Dequeue());
+                                break;
+                        case ConsoleKey.D:
+                            if (queue.Count >= 1)
+                            {
+                                queue.Peek().Open(in users);
+                            }
+                            
+                           
+                            break;
+                        case ConsoleKey.Escape: temp = false; break;
+                    }
+                }
+            }
+
+            Console.Clear();
+
         }
         public void DeleteCompany()
         {
@@ -271,7 +338,13 @@ namespace Haking
 
                     switch (key)
                     {
-                        case ConsoleKey.S: queue.Enqueue(queue.Dequeue()); break;
+                        case ConsoleKey.S:
+                            if (queue.Count > 1)
+                            {
+                                queue.Enqueue(queue.Dequeue());
+                            }
+
+                            break;
                         case ConsoleKey.D: comp = queue.Peek(); temp = false; break;
                         case ConsoleKey.Escape: temp = false; break;
                     }
@@ -312,11 +385,13 @@ namespace Haking
     class Person
     {
         public Guid Id { get; set; }
+        public int Age { get; set; }
         public string Name { get; set; }
 
-        public Person(string Name, Guid Id)
+        public Person(string Name, Guid Id, int Age)
         {
             this.Name = Name;
+            this.Age = Age;
         }
     }
 
@@ -334,16 +409,97 @@ namespace Haking
             entryage = Entryage;
             maxcountworkers = Maxcountworkers;
         }
-
-        public void AddPerson(Person person)
+        
+        public void Open(in List<Person> users)
         {
-            if (!workers.Contains(person) && workers.Count < maxcountworkers)
+            bool temp = true;
+            Console.Clear();
+            while (temp)
             {
+                Console.SetCursorPosition(0, 0);
+                Console.WriteLine("[S добавить чел] [D удалить чел] [F показать людей] [Esc выйти]");
+                Console.WriteLine($"Компания: {Name}                   ");
+                Console.WriteLine($"Количество рабочих: {workers.Count}          ");
+                Console.WriteLine($"Входной возраст: {entryage}           ");
+                Console.WriteLine($"Количество свободных мест: {maxcountworkers - workers.Count}          ");
+
+
+
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKey key = Console.ReadKey().Key;
+
+                    switch (key)
+                    {
+                        case ConsoleKey.S:
+                            Console.Clear();
+                            Console.WriteLine("Добавление рабочего");
+                            Console.Write("Введите имя: ");
+                            string name = Console.ReadLine();
+                            Console.WriteLine();
+                            Console.Write("Введите возраст: ");
+                            int age = int.Parse(Console.ReadLine());
+                            Console.WriteLine();
+                            Guid ID = Guid.NewGuid();
+                            Person person = new Person(name, ID, age);
+                            AddPerson(person, users);
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case ConsoleKey.D:
+                            Console.WriteLine("Удаление рабочего");
+                            Console.Write("Введите имя-ID: ");
+                            string text = Console.ReadLine();
+
+                            Person pers;
+
+                            if (Guid.TryParse(text, out var id))
+                            {
+                                pers = FindPerson(id);
+                                if (pers == null)
+                                {
+                                    Console.WriteLine("Рабочий с таким ID не найден.");
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                pers = FindPerson(text);
+                                if (pers == null)
+                                {
+                                    Console.WriteLine("Рабочий с таким именем не найден.");
+                                    return;
+                                }
+                            }
+
+                            DeletePerson(pers, users);
+
+                            Console.WriteLine("Рабочий успешно удалён.");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case ConsoleKey.Escape: temp = false; break;
+                    }
+                }
+            }
+            Console.Clear();
+        }
+
+        public void AddPerson(Person person, in List<Person> users)
+        {
+            if (!workers.Contains(person) && workers.Count < maxcountworkers && person.Age >= entryage)
+            {
+                users.Add(person);
                 workers.Add(person);
+                Console.WriteLine("Успешно добавлен!");
+            }
+            else
+            {
+                Console.WriteLine("Количество мест ограничено или недостаточный возраст!");
             }
         }
 
-        public Person FindPerson(string name, int entryage)
+        public Person FindPerson(string name)
         {
             Person person = workers.FirstOrDefault(p => p.Name == name);
             if (person != null)
@@ -368,11 +524,13 @@ namespace Haking
                 return null;
             }
         }
-        public void AddDelete(Person person)
+        public void DeletePerson(Person person, in List<Person> users)
         {
             if (workers.Contains(person))
             {
+                users.Remove(person);
                 workers.Remove(person);
+                Console.WriteLine("Успешно удален!");
             }
         }
     }
