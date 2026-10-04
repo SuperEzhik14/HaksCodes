@@ -17,12 +17,20 @@ namespace Haking
     {
         public List<Person> users = new List<Person>();
         public List<Company> companies = new List<Company>();
-        
+        private char disk;
 
         public void Start()
         {
             bool temp = true;
             bool temp2 = false;
+            foreach (var dis in DriveInfo.GetDrives())
+            {
+                Console.Write($"{dis.Name} ");
+            }
+            Console.WriteLine();
+            Console.Write("Введите букву доп. диска: ");
+            disk = char.Parse(Console.ReadLine());
+            Console.Clear();
             while (temp)
             {
                 Console.SetCursorPosition(0, 0);
@@ -65,8 +73,8 @@ namespace Haking
         public async void SaveXML()
         {
             Console.Clear();
-            Console.Write("Сохранить в диск E: ");
-            string name = $"E:\\{Console.ReadLine()}";
+            Console.Write($"Сохранить в диск {disk}: ");
+            string name = $"{disk}:\\{Console.ReadLine()}";
             
 
             if (!Directory.Exists(name))
@@ -137,7 +145,7 @@ namespace Haking
             Console.Clear();
             List<FileInfo> mightxmls = new List<FileInfo>();
             //Поиск возможных файлов
-            foreach (var doc in Directory.GetDirectories("E:\\"))
+            foreach (var doc in Directory.GetDirectories($"{disk}:\\"))
             {
 
                 try
@@ -447,6 +455,7 @@ namespace Haking
                             Console.Clear();
                             break;
                         case ConsoleKey.D:
+                            Console.Clear();
                             Console.WriteLine("Удаление рабочего");
                             Console.Write("Введите имя-ID: ");
                             string text = Console.ReadLine();
@@ -475,6 +484,16 @@ namespace Haking
                             DeletePerson(pers, users);
 
                             Console.WriteLine("Рабочий успешно удалён.");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case ConsoleKey.F:
+                            Console.Clear();
+                            Console.WriteLine("Cписок рабочих: ");
+                            foreach (var worker in workers)
+                            {
+                                Console.WriteLine($" {worker.Name} Age:{worker.Age} ID: {worker.Id} ");
+                            }
                             Console.ReadKey();
                             Console.Clear();
                             break;
