@@ -52,7 +52,8 @@ namespace Kokhetay_nahu2_for_kok
 
             ProcessStartInfo infomusic = new ProcessStartInfo()
             {
-                Arguments = $"E:\\TheFatRat_-_Unity_64349365.mp3",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                Arguments = $"{dir2}\\Redactor\\Kokhetay nahu2 for kok\\Music1.mp3",
                 FileName = $"wmplayer.exe",
 
                 CreateNoWindow = true,
@@ -70,7 +71,18 @@ namespace Kokhetay_nahu2_for_kok
                 File.Create(Dekstop);
             }
 
-            string str = "Здарова, меня зовут Pixel221, я предпочитаю файлы на завтрак\nя не буду тебя спрашивать можно ли мне их есть или нет\nа начну пожалуй сейчас 3.... 2........ 1...... Удачи! @=@";
+            string str =
+"Приветствую тебя, смертный…\n" +
+"Меня зовут Pixel221, и я питаюсь файлами твоего компьютера.\n" +
+"Сейчас начнётся испытание для настоящих программистов.\n" +
+"У тебя есть всего 5 минут, чтобы пройти игру.\n" +
+"Твои жизни ограничены — всего 3 сердца.\n" +
+"Если они исчезнут… твой мир погрузится во тьму.\n\n" +
+"И запомни: если ты попытаешься выключить компьютер,\n" +
+"использовать тайные комбинации клавиш или открыть лишние программы —\n" +
+"тень начнёт пожирать твои данные без пощады.\n\n" +
+"Тик-так… время пошло.";
+
 
             ProcessStartInfo info = new ProcessStartInfo()
             {
