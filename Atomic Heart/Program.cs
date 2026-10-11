@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -9,8 +10,9 @@ class Program
 {
     static void Main()
     {
-        Game game = new Game();
-        game.OpenConsole();
+        
+
+        
     }  
 }
 
