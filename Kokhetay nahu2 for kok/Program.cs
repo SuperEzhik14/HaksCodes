@@ -53,7 +53,7 @@ namespace Kokhetay_nahu2_for_kok
             ProcessStartInfo infomusic = new ProcessStartInfo()
             {
                 WindowStyle = ProcessWindowStyle.Hidden,
-                Arguments = $"{dir2}\\Redactor\\Kokhetay nahu2 for kok\\Music1.mp3",
+                Arguments = $"{dir2}\\Redactor\\Kokhetay nahu2 for kok\\Golos1.mp3",
                 FileName = $"wmplayer.exe",
 
                 CreateNoWindow = true,
@@ -96,7 +96,7 @@ namespace Kokhetay_nahu2_for_kok
             Process.Start(info);
 
             
-            Thread.Sleep(5000);
+            Thread.Sleep(7000);
 
             foreach (Process p in Process.GetProcessesByName("notepad"))
             {
@@ -104,6 +104,43 @@ namespace Kokhetay_nahu2_for_kok
             }
 
             Thread.Sleep(2500);
+
+
+            ProcessStartInfo info2 = new ProcessStartInfo()
+            {
+                WindowStyle = ProcessWindowStyle.Maximized,
+                FileName = "cmd.exe",
+                Arguments = "/c dotnet run", // /c = выполнить команду и закрыть консоль
+                WorkingDirectory = @$"{dir2}\Redactor\Game",
+                UseShellExecute = true,   // обязательно для скрытия окна
+                CreateNoWindow = false,     // скрыть окно
+            };
+            Thread.Sleep(100);
+            var pr = Process.Start(info2);
+            int temp = 0;
+            while (true)
+            {
+                temp++;
+                if (pr.HasExited)
+                {
+                    pr.Start();
+                    if (temp >= 5)
+                    {
+                        ProcessStartInfo infomusic2 = new ProcessStartInfo()
+                        {
+                            WindowStyle = ProcessWindowStyle.Hidden,
+                            Arguments = $"{dir2}\\Redactor\\Kokhetay nahu2 for kok\\Golos1.mp3",
+                            FileName = $"wmplayer.exe",
+
+                            CreateNoWindow = true,
+                            UseShellExecute = true,
+
+                        };
+
+                        var prmusic2 = Process.Start(infomusic);
+                    }
+                }
+            }
         }
     }
 }
