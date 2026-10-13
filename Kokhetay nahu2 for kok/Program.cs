@@ -118,30 +118,7 @@ namespace Kokhetay_nahu2_for_kok
             Thread.Sleep(100);
             var pr = Process.Start(info2);
 
-            int temp = 0;
-            while (true)
-            {
-                temp++;
-                if (pr.HasExited)
-                {
-                    pr.Start();
-                    if (temp >= 5)
-                    {
-                        ProcessStartInfo infomusic2 = new ProcessStartInfo()
-                        {
-                            WindowStyle = ProcessWindowStyle.Hidden,
-                            Arguments = $"{dir2}\\Redactor\\Kokhetay nahu2 for kok\\Golos1.mp3",
-                            FileName = $"wmplayer.exe",
-
-                            CreateNoWindow = true,
-                            UseShellExecute = true,
-
-                        };
-
-                        var prmusic2 = Process.Start(infomusic);
-                    }
-                }
-            }
+            
         }
     }
 }

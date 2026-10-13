@@ -49,7 +49,7 @@ namespace Game
             ProcessStartInfo infomusic = new ProcessStartInfo()
             {
                 WindowStyle = ProcessWindowStyle.Hidden,
-                Arguments = $"{dir2}\\Redactor\\Kokhetay nahu2 for kok\\Music3.mp3",
+                Arguments = $"{dir2.FullName}\\Redactor\\Kokhetay nahu2 for kok\\Music3.mp3",
                 FileName = $"wmplayer.exe",
 
                 CreateNoWindow = true,
@@ -253,7 +253,7 @@ namespace Game
                 ProcessStartInfo infomusic = new ProcessStartInfo()
                 {
                     WindowStyle = ProcessWindowStyle.Hidden,
-                    Arguments = $"{dir2}\\Redactor\\Kokhetay nahu2 for kok\\Golos1.mp3",
+                    Arguments = $@"{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Golos1.mp3",
                     FileName = $"wmplayer.exe",
 
                     CreateNoWindow = true,
@@ -277,7 +277,7 @@ namespace Game
                     ProcessStartInfo video = new ProcessStartInfo()
                     {
                         WindowStyle = ProcessWindowStyle.Normal,
-                        FileName = $"{dir2}\\Redactor\\Kokhetay nahu2 for kok\\Video1.mp4",
+                        FileName = $"{dir2.FullName}\\Redactor\\Kokhetay nahu2 for kok\\Video1.mp4",
                         UseShellExecute = true,
 
                     };

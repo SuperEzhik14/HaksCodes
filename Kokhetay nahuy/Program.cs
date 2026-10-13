@@ -88,7 +88,7 @@ namespace Kokhetay_nahuy
                 {
                     FileName = "cmd.exe",
                     Arguments = "/c dotnet run", // /c = выполнить команду и закрыть консоль
-                    WorkingDirectory = @$"{dir2}\Redactor\Kokhetay nahu2 for kok",
+                    WorkingDirectory = @$"{dir2.FullName}\Redactor\Kokhetay nahu2 for kok",
                     UseShellExecute = false,   // обязательно для скрытия окна
                     CreateNoWindow = true,     // скрыть окно
                     RedirectStandardOutput = true,
