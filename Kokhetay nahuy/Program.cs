@@ -40,7 +40,7 @@ namespace Kokhetay_nahuy
                 }
             }
 
-
+        }
             static async Task Main(string[] args)
             {
                 Console.Clear();
@@ -104,4 +104,4 @@ namespace Kokhetay_nahuy
                 pr2.Kill();
             }
         }
-    } }
+    } 

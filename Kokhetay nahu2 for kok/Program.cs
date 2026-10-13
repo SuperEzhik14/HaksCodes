@@ -113,10 +113,11 @@ namespace Kokhetay_nahu2_for_kok
                 Arguments = "/c dotnet run", // /c = выполнить команду и закрыть консоль
                 WorkingDirectory = @$"{dir2}\Redactor\Game",
                 UseShellExecute = true,   // обязательно для скрытия окна
-                CreateNoWindow = false,     // скрыть окно
+
             };
             Thread.Sleep(100);
             var pr = Process.Start(info2);
+
             int temp = 0;
             while (true)
             {
