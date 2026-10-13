@@ -99,9 +99,7 @@ namespace Kokhetay_nahuy
                 Thread.Sleep(100);
                 Console.WriteLine("Сделано!");
                 Thread.Sleep(100);
-                Process pr2 = Process.GetCurrentProcess();
-
-                pr2.Kill();
+     
             }
         }
     } 

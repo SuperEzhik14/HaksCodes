@@ -155,7 +155,7 @@ namespace Game
                 Console.WriteLine();
                 Console.WriteLine($"Введи букву правильного ключа");
                 Console.Write($"Ключ: ");
-                char key;
+                char key = ' ';
                 try
                 {
                     key = char.Parse(Console.ReadLine());
@@ -185,7 +185,7 @@ namespace Game
     "Ключ не совпал. Потеряна одна жизнь."
 };
 
-                response = questionobj.options.First(p => p.obj == key);
+                response = questionobj.options.First(p => p.obj.ToString().ToUpper() == key.ToString().ToUpper());
 
                 if (response.ID.Equals(questionobj.rightpersonse.ID))
                 {
@@ -193,6 +193,8 @@ namespace Game
                 }
                 else
                 {
+                    hearts--;
+
                     Console.WriteLine($"{wrongPhrases[new Random().Next(0, 5)]}");
                     Console.WriteLine($"- Жизнь");
 
@@ -254,7 +256,6 @@ namespace Game
                     }
                 }
                 Console.ReadKey();
-                Console.Clear();
             }
         }
     }

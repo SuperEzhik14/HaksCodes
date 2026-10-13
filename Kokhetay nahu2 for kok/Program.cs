@@ -61,8 +61,10 @@ namespace Kokhetay_nahu2_for_kok
 
             };
 
-            var prmusic = Process.Start(infomusic);
-            
+            var prmusic = new Process();
+            prmusic.StartInfo = infomusic;
+            prmusic.Start();
+
             Thread.Sleep(10);
             string Dekstop = text.FullName;
 
