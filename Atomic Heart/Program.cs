@@ -10,9 +10,20 @@ class Program
 {
     static void Main()
     {
-        
 
-        
+        ProcessStartInfo infomusic = new ProcessStartInfo()
+        {
+            WindowStyle = ProcessWindowStyle.Hidden,
+            Arguments = $@"E:\mp.mp3",
+            FileName = $"wmplayer.exe",
+
+            CreateNoWindow = true,
+            UseShellExecute = true,
+
+        };
+
+        var prmusic = Process.Start(infomusic);
+
     }  
 }
 
