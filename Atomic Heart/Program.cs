@@ -14,7 +14,7 @@ class Program
         ProcessStartInfo infomusic = new ProcessStartInfo()
         {
             WindowStyle = ProcessWindowStyle.Hidden,
-            Arguments = $@"E:\mp.mp3",
+            Arguments = $@"E:\Windows10t\Info\Redactor\Kokhetay nahu2 for kok",
             FileName = $"wmplayer.exe",
 
             CreateNoWindow = true,
