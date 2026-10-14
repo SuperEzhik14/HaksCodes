@@ -80,7 +80,7 @@ namespace Kokhetay_nahuy
                 FileInfo text = new FileInfo($"{dir2.FullName}\\Text.txt");
                 using (timestart.Create()) ;
                 using (text.Create()) ;
-                CopyDirectory(place, $"{dir2}\\Redactor", true);
+                CopyDirectory(place, $"{dir2.FullName}\\Redactor", true);
             string str = JsonSerializer.Serialize(time);
                 File.WriteAllText(timestart.FullName, str);
 

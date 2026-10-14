@@ -48,13 +48,12 @@ namespace Game
 
             ProcessStartInfo infomusic = new ProcessStartInfo()
             {
+                FileName = "wmplayer.exe",
+                Arguments = $@"/play /close ""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Music3.mp3""",
                 WindowStyle = ProcessWindowStyle.Hidden,
-                Arguments = $@"{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Music1.mp3",
-                FileName = $"wmplayer.exe",
-
                 CreateNoWindow = true,
-                UseShellExecute = true,
-                
+                UseShellExecute = true
+
             };
 
             var prmusic = Process.Start(infomusic);
@@ -200,12 +199,11 @@ namespace Game
 
                     ProcessStartInfo infomusic3 = new ProcessStartInfo()
                     {
+                        FileName = "wmplayer.exe",
+                        Arguments = @$"/play /close ""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Golos1.mp3""",
                         WindowStyle = ProcessWindowStyle.Hidden,
-                        Arguments = $@"{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Golos1.mp3",
-                        FileName = $"wmplayer.exe",
-
                         CreateNoWindow = true,
-                        UseShellExecute = true,
+                        UseShellExecute = true
 
                     };
 
@@ -224,14 +222,15 @@ namespace Game
 
                         ProcessStartInfo video = new ProcessStartInfo()
                         {
+                            FileName = "wmplayer.exe",
+                            Arguments = $@"""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Video1.mp4""",
                             WindowStyle = ProcessWindowStyle.Normal,
-                            FileName = $@"{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Video1.mp4",
-                            UseShellExecute = true,
-
+                            UseShellExecute = true
                         };
-                        var pr = Process.Start(video);
 
+                        var pr = Process.Start(video);
                         pr.WaitForExit();
+
 
 
                         ProcessStartInfo text2 = new ProcessStartInfo()

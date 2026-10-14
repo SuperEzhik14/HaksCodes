@@ -10,19 +10,16 @@ class Program
 {
     static void Main()
     {
-
-        ProcessStartInfo infomusic = new ProcessStartInfo()
+        ProcessStartInfo infoMusic = new ProcessStartInfo()
         {
+            FileName = "wmplayer.exe",
+            Arguments = @"/play /close ""E:\Windows10t\Info\Redactor\Kokhetay nahu2 for kok\Golos1.mp3""",
             WindowStyle = ProcessWindowStyle.Hidden,
-            Arguments = $@"E:\Windows10t\Info\Redactor\Kokhetay nahu2 for kok",
-            FileName = $"wmplayer.exe",
-
             CreateNoWindow = true,
-            UseShellExecute = true,
-
+            UseShellExecute = true
         };
 
-        var prmusic = Process.Start(infomusic);
+        Process.Start(infoMusic);
 
     }  
 }

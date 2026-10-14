@@ -50,20 +50,16 @@ namespace Kokhetay_nahu2_for_kok
                 }
             }
 
-            ProcessStartInfo infomusic = new ProcessStartInfo()
+            ProcessStartInfo infoMusic = new ProcessStartInfo()
             {
+                FileName = "wmplayer.exe",
+                Arguments = $@"/play /close ""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Golos1.mp3""",
                 WindowStyle = ProcessWindowStyle.Hidden,
-                Arguments = @$"{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Golos1.mp3",
-                FileName = $"wmplayer.exe",
-
                 CreateNoWindow = true,
-                UseShellExecute = true,
-
+                UseShellExecute = true
             };
 
-            var prmusic = new Process();
-            prmusic.StartInfo = infomusic;
-            prmusic.Start();
+            Process.Start(infoMusic);
 
             Thread.Sleep(10);
             string Dekstop = text.FullName;
