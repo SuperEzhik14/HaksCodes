@@ -198,7 +198,7 @@ namespace Game
                     Console.WriteLine($"- Жизнь");
 
      
-                    if (hearts <= 0)
+                    if (hearts == 0)
                     {
                         Console.WriteLine("Смерть");
                         prmusic.Kill();
@@ -209,18 +209,28 @@ namespace Game
                             prmusic.Kill();
                         }
 
+                        try
+                        {
+                            prmusic.Kill(true);
+                        }
+                        catch 
+                        {
+
+                           
+                        }
+
                         ProcessStartInfo video = new ProcessStartInfo()
                         {
                             FileName = "wmplayer.exe",
                             Arguments = $@"""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Video1.mp4""",
-                            WindowStyle = ProcessWindowStyle.Normal,
                             UseShellExecute = true
                         };
 
                         var pr = Process.Start(video);
-                        pr.WaitForExit();
 
+                        
 
+                        Thread.Sleep(35000);
 
                         ProcessStartInfo text2 = new ProcessStartInfo()
                         {

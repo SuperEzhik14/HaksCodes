@@ -13,13 +13,14 @@ class Program
         ProcessStartInfo video = new ProcessStartInfo()
         {
             FileName = "wmplayer.exe",
-            Arguments = @"""E:\Windows10t\Info\Redactor\Kokhetay nahu2 for kok\Video1.mp4""",
-            WindowStyle = ProcessWindowStyle.Normal,
+            Arguments = $@"""E:\Windows10t\Info\Redactor\Kokhetay nahu2 for kok\Video1.mp4""",
+
             UseShellExecute = true
         };
 
         var pr = Process.Start(video);
-        pr.WaitForExit();
+
+
     }  
 }
 
