@@ -198,7 +198,7 @@ namespace Game
                     Console.WriteLine($"- Жизнь");
 
      
-                    if (hearts == 0)
+                    if (hearts <= 0)
                     {
                         Console.WriteLine("Смерть");                       
 
