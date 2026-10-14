@@ -211,7 +211,7 @@ namespace Game
 
                         ProcessStartInfo video = new ProcessStartInfo()
                         {
-                            FileName = "explorer.exe",
+                            FileName = "wmplayer.exe",
                             Arguments = $@"""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Video1.mp4""",
                             WindowStyle = ProcessWindowStyle.Normal,
                             UseShellExecute = true
@@ -241,6 +241,8 @@ namespace Game
                         {
                             item.Kill();
                         }
+
+                        return;
                     }
                 }
                 Console.ReadKey();
