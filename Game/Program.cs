@@ -157,7 +157,7 @@ namespace Game
                 char key = ' ';
                 try
                 {
-                    key = char.Parse(Console.ReadLine());
+                    key = Console.ReadKey().KeyChar;
                 }
                 catch
                 {
@@ -200,18 +200,14 @@ namespace Game
      
                     if (hearts == 0)
                     {
-                        Console.WriteLine("Смерть");
-                        prmusic.Kill();
-                        for (int i = 0; i < 15; i++)
-                        {
-                            prmusic = Process.Start(infomusic);
-                            Thread.Sleep(100 / i);
-                            prmusic.Kill();
-                        }
+                        Console.WriteLine("Смерть");                       
 
                         try
                         {
-                            prmusic.Kill(true);
+                            if (prmusic != null && !prmusic.HasExited)
+                            {
+                                prmusic.Kill();
+                            }
                         }
                         catch 
                         {
@@ -228,9 +224,9 @@ namespace Game
 
                         var pr = Process.Start(video);
 
-                        
 
-                        Thread.Sleep(35000);
+
+                        pr.WaitForExit();
 
                         ProcessStartInfo text2 = new ProcessStartInfo()
                         {
