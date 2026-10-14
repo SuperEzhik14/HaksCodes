@@ -197,18 +197,7 @@ namespace Game
                     Console.WriteLine($"{wrongPhrases[new Random().Next(0, 5)]}");
                     Console.WriteLine($"- Жизнь");
 
-                    ProcessStartInfo infomusic3 = new ProcessStartInfo()
-                    {
-                        FileName = "wmplayer.exe",
-                        Arguments = @$"/play /close ""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Golos1.mp3""",
-                        WindowStyle = ProcessWindowStyle.Hidden,
-                        CreateNoWindow = true,
-                        UseShellExecute = true
-
-                    };
-
-                    var prmusic3 = Process.Start(infomusic3);
-
+     
                     if (hearts <= 0)
                     {
                         Console.WriteLine("Смерть");
@@ -222,7 +211,7 @@ namespace Game
 
                         ProcessStartInfo video = new ProcessStartInfo()
                         {
-                            FileName = "wmplayer.exe",
+                            FileName = "explorer.exe",
                             Arguments = $@"""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Video1.mp4""",
                             WindowStyle = ProcessWindowStyle.Normal,
                             UseShellExecute = true
