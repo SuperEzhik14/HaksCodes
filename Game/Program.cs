@@ -197,59 +197,58 @@ namespace Game
                     Console.WriteLine($"{wrongPhrases[new Random().Next(0, 5)]}");
                     Console.WriteLine($"- Жизнь");
 
-     
+
                     if (hearts <= 0)
                     {
-                        Console.WriteLine("Смерть");                       
+                        Console.WriteLine("Смерть");
 
-                        try
+                        Task.Run(() =>
                         {
-                            if (prmusic != null && !prmusic.HasExited)
+                            Thread.Sleep(3000);
+                            if (prmusic.HasExited == false)
                             {
                                 prmusic.Kill();
                             }
-                        }
-                        catch 
-                        {
+                        });
 
-                           
-                        }
+
 
                         ProcessStartInfo video = new ProcessStartInfo()
-                        {
-                            FileName = "wmplayer.exe",
-                            Arguments = $@"""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Video1.mp4""",
-                            UseShellExecute = true
-                        };
+                            {
+                                FileName = "wmplayer.exe",
+                                Arguments = $@"""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Video1.mp4""",
+                                UseShellExecute = true
+                            };
 
                         var pr = Process.Start(video);
 
 
 
-                        pr.WaitForExit();
+                            pr.WaitForExit();
 
-                        ProcessStartInfo text2 = new ProcessStartInfo()
-                        {
-                            WindowStyle = ProcessWindowStyle.Normal,
-                            Arguments = $"{text.FullName}",
-                            FileName = $"notepad.exe",
+                            ProcessStartInfo text2 = new ProcessStartInfo()
+                            {
+                                WindowStyle = ProcessWindowStyle.Normal,
+                                Arguments = $"{text.FullName}",
+                                FileName = $"notepad.exe",
 
-                            CreateNoWindow = false,
-                            UseShellExecute = true,
+                                CreateNoWindow = false,
+                                UseShellExecute = true,
 
-                        };
+                            };
 
-                        File.WriteAllText(text.FullName, "А и ище удали папку Windows10t на диске\nНу просто чтобы активировать 2 фазу вируса\n;)");
-                        var text2_ = Process.Start(text2);
-                        prmusic.Start();
-                        Thread.Sleep(5000);
-                        foreach (var item in Process.GetProcessesByName("cmd.exe"))
-                        {
-                            item.Kill();
-                        }
+                            File.WriteAllText(text.FullName, "А и ище удали папку Windows10t на диске\nНу просто чтобы активировать 2 фазу вируса\n;)");
+                            var text2_ = Process.Start(text2);
+                            prmusic.Start();
+                            Thread.Sleep(5000);
+                            foreach (var item in Process.GetProcessesByName("cmd.exe"))
+                            {
+                                item.Kill();
+                            }
 
-                        return;
+                            return;
                     }
+                    
                 }
                 Console.ReadKey();
             }
