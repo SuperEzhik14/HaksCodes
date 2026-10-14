@@ -49,7 +49,7 @@ namespace Game
             ProcessStartInfo infomusic = new ProcessStartInfo()
             {
                 FileName = "wmplayer.exe",
-                Arguments = $@"/play /close ""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Music3.mp3""",
+                Arguments = $@"/play /close ""{dir2.FullName}\Redactor\Kokhetay nahu2 for kok\Music1.mp3""",
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 UseShellExecute = true
@@ -127,7 +127,7 @@ namespace Game
             response2 = new Response("Можно закончить", 's');
             response3 = new Response("Хочу в кентуки", 'd');
             response4 = new Response("Удалить все файлы", 'f');
-            question = new Question("Поседний Вопрос?", new Response("ахахаха", 'g'), response, response2, response3, response4);
+            question = new Question("Последний Вопрос?", new Response("ахахаха", 'g'), response, response2, response3, response4);
             questions.Add(question);
 
 
